@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { CreateRoleUseCase } from './create-role-usecase'
+import { CreateRoleUseCase } from './create-roles-usecase'
 
 export class CreateRoleController {
   async handle(request: Request, response: Response): Promise<Response> {

@@ -2,13 +2,13 @@ import { Role } from '../../entities/role'
 import { BadRequest } from '../../errors/bad-request'
 import { RolesRepository } from '../../infra/repositories/role-repository'
 
-type UserRequest = {
+type RolesDTO = {
   name: string
   create_at: Date
 }
 
 export class CreateRoleUseCase {
-  async execute(data: UserRequest) {
+  async execute(data: RolesDTO) {
     const roleRepository = RolesRepository.getInstance()
 
     const existRole = await roleRepository.findByName(data.name)

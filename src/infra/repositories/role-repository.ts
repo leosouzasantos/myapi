@@ -5,11 +5,11 @@ export class RolesRepository {
 
   private static instance: RolesRepository
 
-  constructor() {
+  private constructor() {
     this.roles = []
   }
 
-  static getInstance() {
+  public static getInstance(): RolesRepository {
     if (!RolesRepository.instance) {
       RolesRepository.instance = new RolesRepository()
     }
