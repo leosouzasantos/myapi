@@ -1,12 +1,12 @@
 import { Role } from '../../entities/role'
 
 export class RolesRepository {
-  role: Role[]
+  roles: Role[]
 
   private static instance: RolesRepository
 
   constructor() {
-    this.role = []
+    this.roles = []
   }
 
   static getInstance() {
@@ -17,8 +17,16 @@ export class RolesRepository {
     return RolesRepository.instance
   }
 
+  async findByName(name: string): Promise<Role | undefined> {
+    return this.roles.find((role) => role.name === name)
+  }
+
   async save(data: Role) {
-    this.role.push(data)
+    this.roles.push(data)
     return data
+  }
+
+  async findAll(): Promise<Role[]> {
+    return this.roles
   }
 }

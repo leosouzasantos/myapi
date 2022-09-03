@@ -8,10 +8,10 @@ type IRoles = {
 export class Role {
   id: string
   name: string
-  create_at: string
+  create_at: Date
   private constructor(props: IRoles) {
     this.name = props.name
-    this.create_at = Date()
+    this.create_at = new Date()
     this.id = uuidv4()
   }
 
