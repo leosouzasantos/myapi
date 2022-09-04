@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { CreateRoleController } from '../useCases/create-roles/create-roles-controller'
-import { ListRoleController } from '../useCases/list-roles/list-roles-controller'
+import { CreateRoleController } from '../../useCases/create-roles/create-roles-controller'
+import { ListRoleController } from '../../useCases/list-roles/list-roles-controller'
 
 const rolesRouter = Router()
 const createRoleController = new CreateRoleController()
