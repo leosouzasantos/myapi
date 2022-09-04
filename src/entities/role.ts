@@ -1,22 +1,20 @@
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
 import { v4 as uuidv4 } from 'uuid'
 
-type IRoles = {
-  name: string
-  create_at: Date
-}
-
+@Entity('roles')
 export class Role {
-  id: string
-  name: string
-  create_at: Date
-  private constructor(props: IRoles) {
-    this.name = props.name
-    this.create_at = new Date()
-    this.id = uuidv4()
-  }
+  @PrimaryColumn()
+  id?: string
 
-  static create(props: IRoles) {
-    const role = new Role(props)
-    return role
+  @Column()
+  name: string
+
+  @CreateDateColumn()
+  create_at: Date
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuidv4()
+    }
   }
 }
