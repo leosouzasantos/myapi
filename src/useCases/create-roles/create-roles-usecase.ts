@@ -4,21 +4,18 @@ import { RolesRepository } from '../../infra/repositories/role-repository'
 
 type RolesDTO = {
   name: string
-  create_at: Date
 }
 
 export class CreateRoleUseCase {
-  async execute(data: RolesDTO) {
+  async execute({ name }: RolesDTO): Promise<Role> {
     const roleRepository = RolesRepository.getInstance()
 
-    const existRole = await roleRepository.findByName(data.name)
+    const existRole = await roleRepository.findByName(name)
 
     if (existRole) {
       throw new BadRequest('Role already exists')
     }
 
-    const role = Role.create(data)
-    const roleCreated = await roleRepository.save(role)
-    return roleCreated
+    return roleRepository.create({ name })
   }
 }

@@ -32,21 +32,22 @@ export class RolesRepository {
     if (!RolesRepository.instance) {
       RolesRepository.instance = new RolesRepository()
     }
-
     return RolesRepository.instance
   }
 
   async create({ name }: CreateRoleDTO): Promise<Role> {
     const role = this.repository.create({ name })
-    return this.repository.save(role)
+    await this.repository.save(role)
+    return role
   }
 
-  async save(data: Role): Promise<Role> {
-    return this.repository.save(data)
+  async save(role: Role): Promise<Role> {
+    await this.repository.save(role)
+    return role
   }
 
-  async delete(data: Role): Promise<void> {
-    await this.repository.remove(data)
+  async delete(role: Role): Promise<void> {
+    await this.repository.remove(role)
   }
 
   async findAll({

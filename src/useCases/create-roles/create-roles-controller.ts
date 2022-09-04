@@ -4,10 +4,10 @@ import { CreateRoleUseCase } from './create-roles-usecase'
 export class CreateRoleController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
-      const data = request.body
+      const { name } = request.body
 
       const useCase = new CreateRoleUseCase()
-      const result = await useCase.execute(data)
+      const result = await useCase.execute({ name })
 
       return response.status(201).json(result)
     } catch (err: any) {
