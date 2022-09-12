@@ -1,25 +1,14 @@
 import { Repository } from 'typeorm'
 import { Role } from '../../entities/role'
+import {
+  CreateRoleDTO,
+  IRolesRepository,
+  PaginateParams,
+  RolesPaginateProperties,
+} from './IRole-repository'
 import { AppDataSource } from './typeorm/data-source'
 
-type CreateRoleDTO = {
-  name: string
-}
-
-export type PaginateParams = {
-  page: number
-  skip: number
-  take: number
-}
-
-export type RolesPaginateProperties = {
-  per_page: number
-  total: number
-  current_page: number
-  data: Role[]
-}
-
-export class RolesRepository {
+export class RolesRepository implements IRolesRepository {
   private repository: Repository<Role>
 
   private static instance: RolesRepository
