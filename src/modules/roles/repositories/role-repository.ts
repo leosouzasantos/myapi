@@ -1,12 +1,12 @@
 import { Repository } from 'typeorm'
-import { Role } from '../../entities/role'
+import { Role } from '../../../entities/role'
+import { AppDataSource } from '../../../infra/typeorm/data-source'
 import {
   CreateRoleDTO,
   IRolesRepository,
   PaginateParams,
   RolesPaginateProperties,
 } from './IRole-repository'
-import { AppDataSource } from './typeorm/data-source'
 
 export class RolesRepository implements IRolesRepository {
   private repository: Repository<Role>

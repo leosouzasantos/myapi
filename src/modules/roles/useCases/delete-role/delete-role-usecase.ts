@@ -1,6 +1,5 @@
-import { Role } from '../../entities/role'
-import { BadRequest } from '../../errors/bad-request'
-import { RolesRepository } from '../../infra/repositories/role-repository'
+import { BadRequest } from '../../../../errors/bad-request'
+import { RolesRepository } from '../../repositories/role-repository'
 
 type IDeleteRoles = {
   id: string
