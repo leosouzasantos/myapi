@@ -1,6 +1,7 @@
 import { hash } from 'bcryptjs'
 import { User } from '../../../../entities/user'
 import { BadRequest } from '../../../../errors/bad-request'
+import { RolesRepository } from '../../../roles/repositories/role-repository'
 import { UsersRepository } from '../../repositories/users-repository'
 
 type CreateUserDTO = {
@@ -20,6 +21,7 @@ export class CreateUserUseCase {
     roleId,
   }: CreateUserDTO): Promise<User> {
     const usersRepository = UsersRepository.getInstance()
+    const rolesRepository = RolesRepository.getInstance()
 
     if (!email || !password) {
       throw new BadRequest('email/password is required')
@@ -31,19 +33,20 @@ export class CreateUserUseCase {
       throw new BadRequest('Email address already used')
     }
 
-    const role = await usersRepository.findById(roleId)
+    const role = await rolesRepository.findById(roleId)
 
     if (!role) {
       throw new BadRequest('Role not found', 404)
     }
 
     const hashedPassword = await hash(password, 10)
-    return usersRepository.create({
+    const user = usersRepository.create({
       name,
       email,
       password: hashedPassword,
       admin,
       role,
     })
+    return user
   }
 }
