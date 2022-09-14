@@ -13,8 +13,25 @@ export class UsersRepository implements IUserRepository {
   constructor() {
     this.repository = AppDataSource.getRepository(User)
   }
-  async create(data: CreateUserDTO): Promise<User> {
-    const user = this.repository.create(data)
+
+  private static instance: UsersRepository
+
+  static getInstance() {
+    if (!UsersRepository.instance) {
+      UsersRepository.instance = new UsersRepository()
+    }
+
+    return UsersRepository.instance
+  }
+
+  async create({
+    name,
+    email,
+    password,
+    admin,
+    role,
+  }: CreateUserDTO): Promise<User> {
+    const user = this.repository.create({ name, email, password, admin, role })
     await this.repository.save(user)
     return user
   }
