@@ -6,8 +6,8 @@ export class CreateRoleController {
     try {
       const { name } = request.body
 
-      const useCase = new CreateRoleUseCase()
-      const result = await useCase.execute({ name })
+      const createRoleUseCase = new CreateRoleUseCase()
+      const result = await createRoleUseCase.execute({ name })
 
       return response.status(201).json(result)
     } catch (err: any) {
