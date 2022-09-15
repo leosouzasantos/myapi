@@ -1,3 +1,4 @@
+import { instanceToInstance } from 'class-transformer'
 import { Request, Response } from 'express'
 import { CreateUserUseCase } from './create-user-usecase'
 
@@ -14,7 +15,7 @@ export class CreateUserController {
         admin,
         roleId,
       })
-      return response.status(201).json(user)
+      return response.status(201).json(instanceToInstance(user))
     } catch (err: any) {
       return response.status(400).json(err.message)
     }

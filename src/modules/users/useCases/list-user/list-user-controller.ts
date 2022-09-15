@@ -1,3 +1,4 @@
+import { instanceToInstance } from 'class-transformer'
 import { Request, Response } from 'express'
 import { ListUsersUseCase } from './list-user-usecase'
 
@@ -15,7 +16,7 @@ export class ListUsersController {
         ? Number(request.query.limit)
         : 15
 
-    const roles = await listUserUseCase.execute({ page, limit })
-    return response.json(roles)
+    const users = await listUserUseCase.execute({ page, limit })
+    return response.json(instanceToInstance(users))
   }
 }
