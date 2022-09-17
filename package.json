@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/main/server.ts",
-    "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
+    "seed:admin": "ts-node-dev src/infra/typeorm/seeds/admin.ts"
   },
   "keywords": [],
   "author": "",
