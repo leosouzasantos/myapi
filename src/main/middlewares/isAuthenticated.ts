@@ -3,6 +3,10 @@ import { BadRequest } from '../../errors/bad-request'
 import { Secret, verify } from 'jsonwebtoken'
 import { auth } from '../../config/auth'
 
+type JwtPayloadProps = {
+  sub: string
+}
+
 export const isAuthenticated = async (
   request: Request,
   response: Response,
@@ -14,7 +18,9 @@ export const isAuthenticated = async (
   }
   const token = authHeader.replace('Bearer ', '')
   try {
-    verify(token, auth.secretKey as Secret)
+    const decodedToken = verify(token, auth.secretKey as Secret)
+    const { sub } = decodedToken as JwtPayloadProps
+    request.user = { id: sub }
     return next()
   } catch {
     throw new BadRequest('Invalid authentication token', 401)

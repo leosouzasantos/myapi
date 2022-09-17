@@ -24,13 +24,13 @@ export class CreateUserUseCase {
     const rolesRepository = RolesRepository.getInstance()
 
     if (!email || !password) {
-      throw new BadRequest('email/password is required')
+      throw new BadRequest('email/password is required', 401)
     }
 
     const existEmail = await usersRepository.findByEmail(email)
 
     if (existEmail) {
-      throw new BadRequest('Email address already used')
+      throw new BadRequest('Email address already used', 401)
     }
 
     const role = await rolesRepository.findById(roleId)

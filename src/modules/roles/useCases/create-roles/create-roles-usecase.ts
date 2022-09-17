@@ -13,7 +13,7 @@ export class CreateRoleUseCase {
     const existRole = await roleRepository.findByName(name)
 
     if (existRole) {
-      throw new BadRequest('Role already exists')
+      throw new BadRequest('Role already exists', 401)
     }
 
     return roleRepository.create({ name })

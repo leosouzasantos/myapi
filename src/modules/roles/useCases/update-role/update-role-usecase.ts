@@ -19,7 +19,7 @@ export class UpdateRoleUseCase {
 
     const roleName = await roleRepository.findByName(name)
     if (roleName) {
-      throw new BadRequest('Role name not informed or already in use')
+      throw new BadRequest('Role name not informed or already in use', 401)
     }
 
     role.name = name
