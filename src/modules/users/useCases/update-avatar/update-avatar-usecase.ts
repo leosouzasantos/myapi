@@ -7,7 +7,7 @@ import uploadConfig from '../../../../config/upload'
 
 type UpdateAvatarDTO = {
   userId: string
-  avatarFilename: string
+  avatarFilename?: string
 }
 
 export class UpdateAvatarUseCase {
